@@ -1,0 +1,206 @@
+swagger: "2.0"
+info:
+  description: "A task manager microservice."
+  version: "1.0.0"
+  title: "Task Manager"
+host: "localhost:8000"
+basePath: "/"
+tags:
+  - name: "task"
+    description: "All task-related endpoints"
+  - name: "assignee"
+    description: "All assignee-related endpoints"
+schemes:
+  - "http"
+paths:
+  /tasks:
+    post:
+      tags:
+        - "task"
+      summary: "Add a new task"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      parameters:
+        - in: "body"
+          name: "task"
+          description: "Task that needs to be added to the manager."
+          required: true
+          schema:
+            properties:
+              title:
+                type: "string"
+                minLength: 3
+                maxLength: 64
+              description:
+                type: "string"
+              assignee_id:
+                type: "integer"
+                format: "int32"
+      responses:
+        "201":
+          description: "Created"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                format: "int32"
+                description: "The task id"
+        "400":
+          description: "Bad request"
+    get:
+      tags:
+        - "task"
+      summary: "List all tasks"
+      consumes:
+        - "application/json"
+      produces:
+        - "application/json"
+      responses:
+        "200":
+          description: "Tasks found"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                  format: "int32"
+                  description: "The task id"
+                title:
+                  type: "string"
+                  minLength: 3
+                  maxLength: 64
+                assignee_id:
+                  type: "integer"
+                  format: "int32"
+                status:
+                  type: "string"
+                  enum:
+                    - "TODO"
+                    - "IN_PROGRESS"
+                    - "DONE"
+  /tasks/{id}:
+    get:
+      tags:
+        - "task"
+      summary: "Get a specific task by its id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "The task id"
+          required: true
+          type: "integer"
+          format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                format: "int32"
+              title:
+                type: "string"
+                minLength: 3
+                maxLength: 64
+              description:
+                type: "string"
+              assignee_id:
+                type: "integer"
+                format: "int32"
+              status:
+                type: "string"
+                enum:
+                  - "TODO"
+                  - "IN_PROGRESS"
+                  - "DONE"
+        "404":
+          description: "Not found"
+    patch:
+      tags:
+        - "task"
+      summary: "Update the task status"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "The task id"
+          required: true
+          type: "integer"
+          format: "int32"
+        - in: "body"
+          name: "status"
+          description: "The new task status"
+          required: true
+          schema:
+            properties:
+              status:
+                type: "string"
+                enum:
+                  - "TODO"
+                  - "IN_PROGRESS"
+                  - "DONE"
+      responses:
+        "200":
+          description: "OK"
+        "404":
+          description: "Not found"
+  /assignees:
+    get:
+      tags:
+        - "assignee"
+      summary: "Get all assignees"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "array"
+            items:
+              type: "object"
+              properties:
+                id:
+                  type: "integer"
+                  format: "int32"
+                first_name:
+                  type: "string"
+                last_name:
+                  type: "string"
+                email_address:
+                  type: "string"
+                  format: "email"
+  /assignees/{id}:
+    get:
+      tags:
+        - "assignee"
+      summary: "Get a specific assignee by its id"
+      produces:
+        - "application/json"
+      parameters:
+        - name: "id"
+          in: "path"
+          description: "The assignee id"
+          required: true
+          type: "integer"
+          format: "int32"
+      responses:
+        "200":
+          description: "OK"
+          schema:
+            type: "object"
+            properties:
+              id:
+                type: "integer"
+                format: "int32"
+              first_name:
+                type: "string"
+              last_name:
+                type: "string"
+              email_address:
+                type: "string"
+                format: "email"
