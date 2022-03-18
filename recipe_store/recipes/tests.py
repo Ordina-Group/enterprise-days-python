@@ -71,6 +71,19 @@ class TestGetIngredients(APITestCase):
 
 
 class TestRecipeModel(TestCase):
+    def test_create_recipe_with_ingredients(self) -> None:
+        pizza = Recipe.objects.create(
+            name="Schnitzel pizza", description="For the true schnitzel lover!"
+        )
+        pizza.ingredients.create(
+            name="Dough", description="The dough", through_defaults={"quantity": 1}
+        )
+        pizza.ingredients.create(
+            name="Sauce", description="The sauce", through_defaults={"quantity": 2}
+        )
+
+        self.assertEqual(pizza.ingredients.count(), 2)
+
     def test_sku(self) -> None:
         recipe = Recipe.objects.create(
             name="Schnitzel pizza", description="For the true schnitzel lover!"
