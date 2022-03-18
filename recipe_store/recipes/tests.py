@@ -1,10 +1,13 @@
+from typing import cast
+
 from rest_framework import status
+from rest_framework.response import Response
 from rest_framework.test import APITestCase
 
 
 class TestGetRecipes(APITestCase):
     def test_get_recipes(self) -> None:
-        response = self.client.get("/recipes/")
+        response = cast(Response, self.client.get("/recipes/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
@@ -19,7 +22,7 @@ class TestGetRecipes(APITestCase):
         )
 
     def test_get_recipe__recipe_found(self) -> None:
-        response = self.client.get("/recipes/PIZ00000001")
+        response = cast(Response, self.client.get("/recipes/PIZ00000001"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
@@ -46,14 +49,14 @@ class TestGetRecipes(APITestCase):
         )
 
     def test_get_recipe__recipe_not_found(self) -> None:
-        response = self.client.get("/recipes/PIZ00000002")
+        response = cast(Response, self.client.get("/recipes/PIZ00000002"))
 
         self.assertEqual(response.status_code, 404)
 
 
 class TestGetIngredients(APITestCase):
     def test_get_ingredients(self) -> None:
-        response = self.client.get("/ingredients/")
+        response = cast(Response, self.client.get("/ingredients/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
