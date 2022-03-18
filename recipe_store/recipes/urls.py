@@ -4,6 +4,7 @@ from recipes import views
 
 urlpatterns = [
     path('', views.RecipeView.as_view()),
+    path('<str:sku>', views.RecipeDetailView.as_view()),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns)
