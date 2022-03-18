@@ -45,4 +45,4 @@ urlpatterns_: list[URLResolver | RoutePattern | URLPattern | Pattern[Any]] = [
     ),
 ]
 
-urlpatterns = format_suffix_patterns(urlpatterns_)
+urlpatterns = format_suffix_patterns(urlpatterns_, allowed=["json"])

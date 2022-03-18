@@ -1,3 +1,5 @@
+from typing import Literal, Optional
+
 from django.shortcuts import get_object_or_404
 from drf_spectacular.types import OpenApiTypes
 from drf_spectacular.utils import OpenApiParameter, extend_schema
@@ -12,10 +14,12 @@ from rest_framework.request import Request
 from rest_framework.response import Response
 from rest_framework.views import APIView
 
+POSSIBLE_FORMATS = Optional[Literal["json"]]
+
 
 class RecipeView(APIView):
     @extend_schema(description="get all recipes", responses=RecipeSerializer)
-    def get(self, request: Request) -> Response:
+    def get(self, request: Request, format: POSSIBLE_FORMATS = None) -> Response:
         recipes = Recipe.objects.all()
 
         print(recipes)
@@ -39,7 +43,9 @@ class RecipeDetailView(APIView):
         ],
         responses=RecipeDetailSerializer,
     )
-    def get(self, request: Request, sku: str) -> Response:
+    def get(
+        self, request: Request, sku: str, format: POSSIBLE_FORMATS = None
+    ) -> Response:
         recipe = get_object_or_404(Recipe, sku=sku)
 
         return Response(
@@ -52,7 +58,7 @@ class IngredientsView(APIView):
     @extend_schema(
         description="get all ingredients", parameters=[], responses=IngredientSerializer
     )
-    def get(self, request: Request) -> Response:
+    def get(self, request: Request, format: POSSIBLE_FORMATS = None) -> Response:
         return Response(
             IngredientSerializer(Ingredient.objects.all(), many=True).data,
             status=status.HTTP_200_OK,
