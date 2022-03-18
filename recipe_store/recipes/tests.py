@@ -9,6 +9,10 @@ from rest_framework.test import APITestCase
 
 class TestGetRecipes(APITestCase):
     def test_get_recipes(self) -> None:
+        name = "Pepperoni"
+        description = "A nice pepperoni pizza"
+        recipe = Recipe.objects.create(name=name, description=description)
+
         response = cast(Response, self.client.get("/recipes/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -16,23 +20,33 @@ class TestGetRecipes(APITestCase):
             response.data,
             [
                 {
-                    "sku": "PIZ00000001",
-                    "name": "Pepperoni",
-                    "description": "A nice pepperoni pizza",
+                    "sku": recipe.sku,
+                    "name": name,
+                    "description": description,
                 }
             ],
         )
 
     def test_get_recipe__recipe_found(self) -> None:
-        response = cast(Response, self.client.get("/recipes/PIZ00000001"))
+        name = "Pepperoni"
+        description = "A nice pepperoni pizza"
+        recipe = Recipe.objects.create(name=name, description=description)
+        recipe.ingredients.create(
+            name="dough", description="The dough", through_defaults={"quantity": 1}
+        )  # type: ignore[misc] # noqa: E501
+        recipe.ingredients.create(
+            name="tomato sauce", description="Sauce", through_defaults={"quantity": 2}
+        )  # type: ignore[misc] # noqa: E501
+
+        response = cast(Response, self.client.get(f"/recipes/{recipe.sku}"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
             response.data,
             {
-                "sku": "PIZ00000001",
-                "name": "Schnitzel pizza",
-                "description": "For the true schnitzel lover!",
+                "sku": recipe.sku,
+                "name": recipe.name,
+                "description": recipe.description,
                 "ingredients": [
                     {
                         "sku": "ING00000001",
@@ -44,7 +58,7 @@ class TestGetRecipes(APITestCase):
                         "sku": "ING00000002",
                         "name": "tomato sauce",
                         "description": "Sauce",
-                        "quantity": 0.04,
+                        "quantity": 2,
                     },
                 ],
             },
@@ -58,6 +72,9 @@ class TestGetRecipes(APITestCase):
 
 class TestGetIngredients(APITestCase):
     def test_get_ingredients(self) -> None:
+        Ingredient.objects.create(name="dough", description="The dough")
+        Ingredient.objects.create(name="tomato sauce", description="Sauce")
+
         response = cast(Response, self.client.get("/ingredients/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
@@ -76,10 +93,10 @@ class TestRecipeModel(TestCase):
             name="Schnitzel pizza", description="For the true schnitzel lover!"
         )
         pizza.ingredients.create(
-            name="Dough", description="The dough", through_defaults={"quantity": 1}
+            name="Dough", description="The dough", through_defaults={"quantity": 1}  # type: ignore[misc] # noqa: E501
         )
         pizza.ingredients.create(
-            name="Sauce", description="The sauce", through_defaults={"quantity": 2}
+            name="Sauce", description="The sauce", through_defaults={"quantity": 2}  # type: ignore[misc] # noqa: E501
         )
 
         self.assertEqual(pizza.ingredients.count(), 2)
