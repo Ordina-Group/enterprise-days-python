@@ -1,7 +1,7 @@
 from typing import cast
 
 from django.test import TestCase
-from recipes.models import Recipe
+from recipes.models import Ingredient, Recipe
 from rest_framework import status
 from rest_framework.response import Response
 from rest_framework.test import APITestCase
@@ -71,9 +71,16 @@ class TestGetIngredients(APITestCase):
 
 
 class TestRecipeModel(TestCase):
-    def test_sku(self):
+    def test_sku(self) -> None:
         recipe = Recipe.objects.create(
             name="Schnitzel pizza", description="For the true schnitzel lover!"
         )
 
         self.assertEqual(recipe.sku, "PIZ00000001")
+
+
+class TestIngredientModel(TestCase):
+    def test_sku(self) -> None:
+        ingredient = Ingredient.objects.create(name="Dough", description="The dough")
+
+        self.assertEqual(ingredient.sku, "ING00000001")
