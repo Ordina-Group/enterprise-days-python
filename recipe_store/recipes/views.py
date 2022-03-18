@@ -20,6 +20,14 @@ class RecipeDetailView(APIView):
             "name": "Schnitzel pizza",
             "description": "For the true schnitzel lover!",
             "ingredients": [
-                {"sku": "ING00000001", "name": "dough", "description": "The dough", "quantity": 1, "uom": "piece"},
-                {"sku": "ING00000002", "name": "tomato sauce", "description": "Sauce", "quantity": 0.04, "uom": "ltr"},
+                {"sku": "ING00000001", "name": "dough", "description": "The dough", "quantity": 1},
+                {"sku": "ING00000002", "name": "tomato sauce", "description": "Sauce", "quantity": 0.04},
             ]}, status=status.HTTP_200_OK)
+
+
+class IngredientsView(APIView):
+    def get(self, request: Request) -> Response:
+        return Response([
+                {"sku": "ING00000001", "name": "dough", "description": "The dough"},
+                {"sku": "ING00000002", "name": "tomato sauce", "description": "Sauce"},
+            ], status=status.HTTP_200_OK)
