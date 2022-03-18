@@ -38,6 +38,9 @@ class Recipe(SkuModelMixin):
         self._set_sku()
         super(Recipe, self).save(*args, **kwargs)
 
+    def __str__(self) -> str:
+        return self.name
+
 
 class Ingredient(SkuModelMixin):
     name = models.CharField(max_length=100)
@@ -50,6 +53,9 @@ class Ingredient(SkuModelMixin):
     def save(self, *args: Any, **kwargs: Any) -> None:
         self._set_sku()
         super(Ingredient, self).save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.name
 
 
 class RecipeIngredient(models.Model):
