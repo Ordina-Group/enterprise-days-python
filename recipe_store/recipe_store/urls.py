@@ -19,6 +19,11 @@ from typing import Any
 from django.contrib import admin
 from django.urls import URLPattern, URLResolver, path
 from django.urls.resolvers import RoutePattern
+from drf_spectacular.views import (
+    SpectacularAPIView,
+    SpectacularRedocView,
+    SpectacularSwaggerView,
+)
 from recipes import views as recipes_views
 from rest_framework.urlpatterns import format_suffix_patterns
 
@@ -27,6 +32,17 @@ urlpatterns_: list[URLResolver | RoutePattern | URLPattern | Pattern[Any]] = [
     path("recipes/", recipes_views.RecipeView.as_view()),
     path("recipes/<str:sku>", recipes_views.RecipeDetailView.as_view()),
     path("ingredients/", recipes_views.IngredientsView.as_view()),
+    path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
+    path(
+        "api/schema/swagger-ui/",
+        SpectacularSwaggerView.as_view(url_name="schema"),
+        name="swagger-ui",
+    ),
+    path(
+        "api/schema/redoc/",
+        SpectacularRedocView.as_view(url_name="schema"),
+        name="redoc",
+    ),
 ]
 
 urlpatterns = format_suffix_patterns(urlpatterns_)

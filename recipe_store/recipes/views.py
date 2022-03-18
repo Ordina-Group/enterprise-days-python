@@ -1,5 +1,12 @@
 from django.shortcuts import get_object_or_404
+from drf_spectacular.types import OpenApiTypes
+from drf_spectacular.utils import OpenApiParameter, extend_schema
 from recipes.models import Ingredient, Recipe
+from recipes.serializers import (
+    IngredientSerializer,
+    RecipeDetailSerializer,
+    RecipeSerializer,
+)
 from rest_framework import status
 from rest_framework.request import Request
 from rest_framework.response import Response
@@ -7,53 +14,46 @@ from rest_framework.views import APIView
 
 
 class RecipeView(APIView):
+    @extend_schema(description="get all recipes", responses=RecipeSerializer)
     def get(self, request: Request) -> Response:
+        recipes = Recipe.objects.all()
+
+        print(recipes)
+
         return Response(
-            [
-                {
-                    "sku": recipe.sku,
-                    "name": recipe.name,
-                    "description": recipe.description,
-                }
-                for recipe in Recipe.objects.all()
-            ],
+            RecipeSerializer(recipes, many=True).data,
             status=status.HTTP_200_OK,
         )
 
 
 class RecipeDetailView(APIView):
+    @extend_schema(
+        description="get single recipe",
+        parameters=[
+            OpenApiParameter(
+                "sku",
+                OpenApiTypes.STR,
+                OpenApiParameter.PATH,
+                description="sku of the recipe",
+            )
+        ],
+        responses=RecipeDetailSerializer,
+    )
     def get(self, request: Request, sku: str) -> Response:
         recipe = get_object_or_404(Recipe, sku=sku)
 
         return Response(
-            {
-                "sku": sku,
-                "name": recipe.name,
-                "description": recipe.description,
-                "ingredients": [
-                    {
-                        "sku": ingredient.ingredient.sku,
-                        "name": ingredient.ingredient.name,
-                        "description": ingredient.ingredient.description,
-                        "quantity": ingredient.quantity,
-                    }
-                    for ingredient in recipe.recipeingredient_set.all()
-                ],
-            },
+            RecipeDetailSerializer(recipe).data,
             status=status.HTTP_200_OK,
         )
 
 
 class IngredientsView(APIView):
+    @extend_schema(
+        description="get all ingredients", parameters=[], responses=IngredientSerializer
+    )
     def get(self, request: Request) -> Response:
         return Response(
-            [
-                {
-                    "sku": ingredient.sku,
-                    "name": ingredient.name,
-                    "description": ingredient.description,
-                }
-                for ingredient in Ingredient.objects.all()
-            ],
+            IngredientSerializer(Ingredient.objects.all(), many=True).data,
             status=status.HTTP_200_OK,
         )
