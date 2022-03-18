@@ -1,0 +1,272 @@
+- model: recipes.recipe
+  pk: PIZ00000001
+  fields:
+    name: Hawai
+    description: The best there is
+- model: recipes.recipe
+  pk: PIZ00000002
+  fields:
+    name: Pepperoni
+    description: The original one
+- model: recipes.recipe
+  pk: PIZ00000003
+  fields:
+    name: BBQ Mixed Grill
+    description: For real men
+- model: recipes.recipe
+  pk: PIZ00000004
+  fields:
+    name: Mega
+    description: Everything we have
+- model: recipes.recipe
+  pk: PIZ00000005
+  fields:
+    name: Margaritha
+    description: Pizza Margaritha
+- model: recipes.ingredient
+  pk: ING00000001
+  fields:
+    name: Dough
+    description: Just some dough
+- model: recipes.ingredient
+  pk: ING00000002
+  fields:
+    name: Cheese
+    description: Just some cheese, imagine the flavor
+- model: recipes.ingredient
+  pk: ING00000003
+  fields:
+    name: Tomato sauce
+    description: Tomato sauce, lot's of it
+- model: recipes.ingredient
+  pk: ING00000004
+  fields:
+    name: Pineapple
+    description: What's a pizza without some delicious pineapple?
+- model: recipes.ingredient
+  pk: ING00000005
+  fields:
+    name: Ham
+    description: Ham, not Spam
+- model: recipes.ingredient
+  pk: ING00000006
+  fields:
+    name: Bacon
+    description: Because why not?
+- model: recipes.ingredient
+  pk: ING00000007
+  fields:
+    name: Minced meat
+    description: Oftewel, gehakt
+- model: recipes.ingredient
+  pk: ING00000008
+  fields:
+    name: Salt
+    description: A pinch of salt
+- model: recipes.ingredient
+  pk: ING00000009
+  fields:
+    name: Pepper
+    description: Try not to sneeze
+- model: recipes.ingredient
+  pk: ING00000010
+  fields:
+    name: Mushrooms
+    description: Not the psychedelic onces
+- model: recipes.ingredient
+  pk: ING00000011
+  fields:
+    name: Salami
+    description: Delicious salami
+- model: recipes.recipeingredient
+  pk: 1
+  fields:
+    recipe: PIZ00000001
+    ingredient: ING00000001
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 2
+  fields:
+    recipe: PIZ00000001
+    ingredient: ING00000002
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 3
+  fields:
+    recipe: PIZ00000001
+    ingredient: ING00000004
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 4
+  fields:
+    recipe: PIZ00000001
+    ingredient: ING00000005
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 5
+  fields:
+    recipe: PIZ00000002
+    ingredient: ING00000001
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 6
+  fields:
+    recipe: PIZ00000002
+    ingredient: ING00000011
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 7
+  fields:
+    recipe: PIZ00000002
+    ingredient: ING00000002
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 8
+  fields:
+    recipe: PIZ00000002
+    ingredient: ING00000009
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 9
+  fields:
+    recipe: PIZ00000002
+    ingredient: ING00000008
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 10
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000001
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 11
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000002
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 12
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000005
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 13
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000006
+    quantity: 5
+- model: recipes.recipeingredient
+  pk: 14
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000011
+    quantity: 7
+- model: recipes.recipeingredient
+  pk: 15
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000008
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 16
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000009
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 17
+  fields:
+    recipe: PIZ00000003
+    ingredient: ING00000007
+    quantity: 5
+- model: recipes.recipeingredient
+  pk: 18
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000001
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 19
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000002
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 20
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000003
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 21
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000004
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 22
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000005
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 23
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000006
+    quantity: 3
+- model: recipes.recipeingredient
+  pk: 24
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000007
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 25
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000008
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 26
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000009
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 27
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000010
+    quantity: 2
+- model: recipes.recipeingredient
+  pk: 28
+  fields:
+    recipe: PIZ00000004
+    ingredient: ING00000011
+    quantity: 21
+- model: recipes.recipeingredient
+  pk: 29
+  fields:
+    recipe: PIZ00000005
+    ingredient: ING00000001
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 30
+  fields:
+    recipe: PIZ00000005
+    ingredient: ING00000002
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 31
+  fields:
+    recipe: PIZ00000005
+    ingredient: ING00000011
+    quantity: 1
+- model: recipes.recipeingredient
+  pk: 32
+  fields:
+    recipe: PIZ00000005
+    ingredient: ING00000003
+    quantity: 1
