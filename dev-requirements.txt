@@ -1,0 +1,7 @@
+mypy
+black
+isort
+flake8
+pre-commit
+django-stubs
+djangorestframework-stubs
