@@ -5,6 +5,23 @@ from django.db import models
 
 
 class SkuModelMixin(models.Model):
+    """Uses the sku (stock keeping unit) field as the primary key.
+
+    `_set_sku()` method must be called inside the `save()` method
+    when this mixin is used.
+
+    Usage example:
+
+    >>> class ModelWithSku(SkuModelMixin):
+    ...     @property
+    ...     def _sku_prefix(self) -> str:
+    ...         return "PIZ"
+    ...
+    ...     def save(self, *args: Any, **kwargs: Any) -> None:
+    ...         self._set_sku()
+    ...         super(ModelWithSku, self).save(*args, **kwargs)
+    """
+
     sku = models.CharField(max_length=11, primary_key=True)
 
     class Meta:
