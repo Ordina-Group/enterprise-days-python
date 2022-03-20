@@ -83,11 +83,7 @@ WSGI_APPLICATION = "recipe_store.wsgi.application"
 DATABASES = {
     # read os.environ['DATABASE_URL'] and raises
     # ImproperlyConfigured exception if not found
-    #
-    # The db() method is an alias for db_url().
     "default": env.db(),
-    # read os.environ['SQLITE_URL']
-    "extra": env.db_url("SQLITE_URL", default=f'sqlite:////{BASE_DIR / "db.sqlite3"}'),
 }
 
 
