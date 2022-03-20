@@ -137,5 +137,4 @@ SPECTACULAR_SETTINGS = {
     "TITLE": "Recipe Store API",
     "DESCRIPTION": "A demo recipe store",
     "VERSION": "1.0.0",
-    # OTHER SETTINGS
 }
