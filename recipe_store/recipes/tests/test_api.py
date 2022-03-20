@@ -12,7 +12,7 @@ class TestRecipeAPIView(APITestCase):
         description = "A nice pepperoni pizza"
         recipe = Recipe.objects.create(name=name, description=description)
 
-        response = cast(Response, self.client.get("/recipes/"))
+        response = cast(Response, self.client.get("/api/recipes/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
@@ -39,7 +39,7 @@ class TestRecipeDetailAPIView(APITestCase):
             name="tomato sauce", description="Sauce", through_defaults={"quantity": 2}
         )  # type: ignore[misc] # noqa: E501
 
-        response = cast(Response, self.client.get(f"/recipes/{recipe.sku}"))
+        response = cast(Response, self.client.get(f"/api/recipes/{recipe.sku}"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(
@@ -66,7 +66,7 @@ class TestRecipeDetailAPIView(APITestCase):
         )
 
     def test_get_recipe__recipe_not_found(self) -> None:
-        response = cast(Response, self.client.get("/recipes/PIZ00000002"))
+        response = cast(Response, self.client.get("/api/recipes/PIZ00000002"))
 
         self.assertEqual(response.status_code, 404)
 
@@ -76,7 +76,7 @@ class TestIngredientsAPIView(APITestCase):
         Ingredient.objects.create(name="dough", description="The dough")
         Ingredient.objects.create(name="tomato sauce", description="Sauce")
 
-        response = cast(Response, self.client.get("/ingredients/"))
+        response = cast(Response, self.client.get("/api/ingredients/"))
 
         self.assertEqual(response.status_code, status.HTTP_200_OK)
         self.assertEqual(

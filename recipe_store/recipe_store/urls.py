@@ -29,9 +29,9 @@ from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns_: list[URLResolver | RoutePattern | URLPattern | Pattern[Any]] = [
     path("admin/", admin.site.urls),
-    path("recipes/", recipes_views.RecipeAPIView.as_view()),
-    path("recipes/<str:sku>", recipes_views.RecipeDetailAPIView.as_view()),
-    path("ingredients/", recipes_views.IngredientsAPIView.as_view()),
+    path("api/recipes/", recipes_views.RecipeAPIView.as_view()),
+    path("api/recipes/<str:sku>", recipes_views.RecipeDetailAPIView.as_view()),
+    path("api/ingredients/", recipes_views.IngredientsAPIView.as_view()),
     path("api/schema/", SpectacularAPIView.as_view(), name="schema"),
     path(
         "api/schema/swagger-ui/",
