@@ -6,7 +6,7 @@ from rest_framework.response import Response
 from rest_framework.test import APITestCase
 
 
-class TestGetRecipes(APITestCase):
+class TestRecipeAPIView(APITestCase):
     def test_get_recipes(self) -> None:
         name = "Pepperoni"
         description = "A nice pepperoni pizza"
@@ -26,6 +26,8 @@ class TestGetRecipes(APITestCase):
             ],
         )
 
+
+class TestRecipeDetailAPIView(APITestCase):
     def test_get_recipe__recipe_found(self) -> None:
         name = "Pepperoni"
         description = "A nice pepperoni pizza"
@@ -69,7 +71,7 @@ class TestGetRecipes(APITestCase):
         self.assertEqual(response.status_code, 404)
 
 
-class TestGetIngredients(APITestCase):
+class TestIngredientsAPIView(APITestCase):
     def test_get_ingredients(self) -> None:
         Ingredient.objects.create(name="dough", description="The dough")
         Ingredient.objects.create(name="tomato sauce", description="Sauce")
