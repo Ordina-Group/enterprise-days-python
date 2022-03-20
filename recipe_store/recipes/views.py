@@ -17,7 +17,7 @@ from rest_framework.views import APIView
 POSSIBLE_FORMATS = Optional[Literal["json"]]
 
 
-class RecipeView(APIView):
+class RecipeAPIView(APIView):
     @extend_schema(description="get all recipes", responses=RecipeSerializer)
     def get(self, request: Request, format: POSSIBLE_FORMATS = None) -> Response:
         recipes = Recipe.objects.all()
@@ -30,7 +30,7 @@ class RecipeView(APIView):
         )
 
 
-class RecipeDetailView(APIView):
+class RecipeDetailAPIView(APIView):
     @extend_schema(
         description="get single recipe",
         parameters=[
@@ -54,7 +54,7 @@ class RecipeDetailView(APIView):
         )
 
 
-class IngredientsView(APIView):
+class IngredientsAPIView(APIView):
     @extend_schema(
         description="get all ingredients", parameters=[], responses=IngredientSerializer
     )
