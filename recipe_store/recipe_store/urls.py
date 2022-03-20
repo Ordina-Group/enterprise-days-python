@@ -19,6 +19,7 @@ from typing import Any
 from django.contrib import admin
 from django.urls import URLPattern, URLResolver, path
 from django.urls.resolvers import RoutePattern
+from django.views.generic import TemplateView
 from drf_spectacular.views import (
     SpectacularAPIView,
     SpectacularRedocView,
@@ -28,6 +29,7 @@ from recipes import views as recipes_views
 from rest_framework.urlpatterns import format_suffix_patterns
 
 urlpatterns_: list[URLResolver | RoutePattern | URLPattern | Pattern[Any]] = [
+    path("", TemplateView.as_view(template_name="pages/home.html"), name="home"),
     path("admin/", admin.site.urls),
     path("api/recipes/", recipes_views.RecipeAPIView.as_view()),
     path("api/recipes/<str:sku>", recipes_views.RecipeDetailAPIView.as_view()),
